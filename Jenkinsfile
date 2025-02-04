@@ -9,6 +9,13 @@ pipeline {
     }
 
     stages {
+        stage('Checkout Repository') {
+            steps {
+                script {
+                    git clone https://github.com/sreekanthops/perf.git
+                }
+            }
+        }
         stage('Run JMeter Test') {
             steps {
                 script {
@@ -42,6 +49,7 @@ pipeline {
                         stage('Run JMeter Test') {
                             echo "Running JMeter test..."
                             bat """
+                                dir %WORKSPACE%
                                 cd ${jmeterPath}
                                 jmeter -n -t "${testPlan}" -l "${resultsFile}" -e -o "${newReportOutput}"
                             """
