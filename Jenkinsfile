@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout Repository') {
             steps {
                 script {
-                    git clone https://github.com/sreekanthops/perf.git
+                    git branch: 'main', url: 'https://github.com/sreekanthops/perf.git'
                 }
             }
         }
